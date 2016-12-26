@@ -1,10 +1,16 @@
 import numpy as np
 import geopy
 import requests
-from StringIO import StringIO
 import matplotlib.pyplot as plt
 from matplotlib import image as img
+from StringIO import StringIO
+from argparse import ArgumentParser
 
+
+parser = ArgumentParser(description = 'Plot a measure of the green land between two locations')
+parser.add_argument('start_point',type=str,help = 'Starting location')
+parser.add_argument('end_point',type=str,help = 'ending location')
+parser.add_argument('steps',type=int,help = 'number of steps between locations')
 
 
 class Greengraph(object):
@@ -76,8 +82,10 @@ class Map(object):
         return buffer.getvalue()
 
 
-mygraph=Greengraph('London','Cape Town')
-data = mygraph.green_between(100)
+
+arguments = parser.parse_args()
+mygraph=Greengraph(arguments.start_point,arguments.end_point)
+data = mygraph.green_between(arguments.steps)
 
 
 plt.plot(data)
