@@ -1,42 +1,6 @@
 import numpy as np
 import geopy
 import requests
-import matplotlib.pyplot as plt
-from matplotlib import image as img
-from StringIO import StringIO
-from argparse import ArgumentParser
-
-
-parser = ArgumentParser(description = 'Plot proportion of green pixels in a series of sattelite images between two specified points')
-parser.add_argument('start_point',type=str,help = 'Starting location')
-parser.add_argument('end_point',type=str,help = 'ending location')
-parser.add_argument('steps',type=int,help = 'number of steps between locations')
-parser.add_argument('output_name',type=int,help = 'filename of graph output')
-
-
-
-class Greengraph(object):
-    def __init__(self, start, end):
-        self.start = start
-        self.end = end
-        self.geocoder = geopy.geocoders.GoogleV3(
-            domain = "maps.google.co.uk")
-
-    def geolocate(self, place):
-        return self.geocoder.geocode(place,exactly_one=False)[0][1]
-
-
-    def location_sequence(self, start,end,steps):
-        lats = np.linspace(start[0], end[0], steps)
-        longs = np.linspace(start[1],end[1], steps)
-        return np.vstack([lats, longs]).transpose()
-
-    def green_between(self, steps):
-        return [Map(*location).count_green()
-                for location in self.location_sequence(
-                    self.geolocate(self.start),
-                    self.geolocate(self.end),steps)]
-
 
 class Map(object):
 
@@ -82,17 +46,4 @@ class Map(object):
         buffer = StringIO()
         result = img.imsave(buffer, out, format='png')
         return buffer.getvalue()
-
-
-
-arguments = parser.parse_args()
-mygraph=Greengraph(arguments.start_point,arguments.end_point)
-data = mygraph.green_between(arguments.steps)
-
-plt.plot(data)
-plt.show()
-plt.savefig("greengraph.png")
-
-
-
 
