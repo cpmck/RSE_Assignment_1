@@ -1,6 +1,10 @@
 import numpy as np
 import geopy
 import requests
+import matplotlib.pyplot as plt
+from matplotlib import image as img
+from StringIO import StringIO
+from argparse import ArgumentParser
 
 class Map(object):
 

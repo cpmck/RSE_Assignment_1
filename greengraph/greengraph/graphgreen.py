@@ -1,8 +1,13 @@
 import numpy as np
 import geopy
 import requests
+import matplotlib.pyplot as plt
+from matplotlib import image as img
+from StringIO import StringIO
+from argparse import ArgumentParser
+from map_class import Map
 
-class Greengraph(object):
+class Graphgreen(object):
     def __init__(self, start, end):
         self.start = start
         self.end = end
