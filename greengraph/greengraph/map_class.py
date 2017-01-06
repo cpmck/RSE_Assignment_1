@@ -61,8 +61,7 @@ class Map(object):
         
         if threshold <= 0 :
             raise ValueError("Threshold must be a positive number")
-
-        
+            
 
         return buffer.getvalue()
 

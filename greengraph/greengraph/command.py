@@ -16,21 +16,34 @@ def process():
 	parser.add_argument('--steps',type=int,help = 'number of steps between locations')
 	parser.add_argument('--titleGraph',type=str,help = 'filename of graph output')
 
+
+
 	arguments = parser.parse_args()
 	mygraph=Graphgreen(arguments.start_point,arguments.end_point)
 	data = mygraph.green_between(arguments.steps)
-	
+
+	print(mygraph.geolocate('London'))
 
 	if type(arguments.start_point) != str:
-		raise TypeError("starting point must be of type string")
+		raise TypeError("start_point point must be of type string")
 
+	if type(arguments.end_point) != str:
+		raise TypeError("end_point must be of type string")
 
-	print data
+	if type(arguments.steps) != int:
+		raise TypeError("steps must be of type int")
+
+	if type(arguments.titleGraph) != str:
+		raise TypeError("titleGraph point must be of type string")
+
+	titlestring = "".join([arguments.start_point," to ",arguments.end_point])
+
 
 	plt.plot(data)
-	#plt.show()
+	plt.ylabel('numeber of green pixels')
+	plt.xlabel('step')
+	plt.title(titlestring)
 	plt.savefig(arguments.titleGraph)
-
 	return data
 
 if __name__ == "__main__":

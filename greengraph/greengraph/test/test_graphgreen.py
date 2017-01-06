@@ -4,8 +4,10 @@ import os
 from nose.tools import assert_equal
 from nose.tools import assert_raises
 import numpy as np
+import mock
 
-"""
+
+
 #check that the location sequence has the right shape
 def test_location_sequence():
     with open(os.path.join(os.path.dirname(__file__),
@@ -61,5 +63,4 @@ def test_location_sequence_lats():
             steps = 10
             sequence = instance.location_sequence(instance.geolocate(instance.start), instance.geolocate(instance.end),steps)
             assert max(abs(sequence[:][1])) < 90
-
-"""               
+                     
