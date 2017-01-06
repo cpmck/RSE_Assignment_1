@@ -34,13 +34,22 @@ class Map(object):
             # Parse our PNG image as a numpy array
     
     def green(self, threshold):
+
+        if threshold <= 0 :
+            raise ValueError("Threshold must be a positive number")
+
         # Use NumPy to build an element-by-element logical array
         greener_than_red = self.pixels[:,:,1] > threshold* self.pixels[:,:,0]
         greener_than_blue = self.pixels[:,:,1] > threshold*self.pixels[:,:,2]
         green = np.logical_and(greener_than_red, greener_than_blue)
         return green
-    
+
+
     def count_green(self, threshold = 1.1):
+        
+        if threshold <= 0 :
+            raise ValueError("Threshold must be a positive number")
+
         return np.sum(self.green(threshold))
 
     
@@ -49,5 +58,11 @@ class Map(object):
         out = green[:,:,np.newaxis]*array([0,1,0])[np.newaxis,np.newaxis,:]
         buffer = StringIO()
         result = img.imsave(buffer, out, format='png')
+        
+        if threshold <= 0 :
+            raise ValueError("Threshold must be a positive number")
+
+        
+
         return buffer.getvalue()
 

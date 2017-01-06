@@ -5,5 +5,5 @@ setup(
 	version = "0.1.0",
 	packages = find_packages(exclude=['*test']),
 	scripts = ['scripts/graphTheGreen'],
-	install_requires = ['argparse', 'geopy','numpy','requests','requests']
+	install_requires = ['argparse', 'geopy','numpy','requests']
 )

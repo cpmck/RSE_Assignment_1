@@ -1,4 +1,5 @@
 - start_point: London
   end_point: Oxford
   steps: 10
-  answer: 
+  titleGraph: graph.png
+  answer: [108032, 109435, 126013, 137117, 150713, 158109, 158079, 158375, 158920, 158198]

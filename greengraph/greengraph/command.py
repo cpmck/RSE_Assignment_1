@@ -19,6 +19,11 @@ def process():
 	arguments = parser.parse_args()
 	mygraph=Graphgreen(arguments.start_point,arguments.end_point)
 	data = mygraph.green_between(arguments.steps)
+	
+
+	if type(arguments.start_point) != str:
+		raise TypeError("starting point must be of type string")
+
 
 	print data
 
@@ -26,6 +31,7 @@ def process():
 	#plt.show()
 	plt.savefig(arguments.titleGraph)
 
+	return data
 
 if __name__ == "__main__":
 	process()
